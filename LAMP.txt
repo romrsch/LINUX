@@ -1,0 +1,45 @@
+
+Обновляем все пакеты: sudo apt update && sudo apt upgrade
+
+Устанавливаем Apache: sudo apt install apache2
+
+Устанавливаем MySQL: sudo apt install mysql-server mysql-client
+
+Устанавливаем основные параметры MYSQL: sudo mysql_secure_installation
+
+Enter current password for root (enter for none): Enter
+Set a root password? [Y/n] Y
+
+Устанавливаем пароль: qazWSX123!
+
+Remove anonymous users? [Y/n] y
+Disallow root login remotely? [Y/n] y
+Remove test database and access to it? [Y/n] y
+Reload privilege tables now? [Y/n] y
+
+Установка phpmyadmin:
+
+Устанавливаем PHP: sudo apt install php libapache2-mod-php php-mysql
+Устанавливаем доп. модули для PHP: sudo apt install php-redis php-zip
+Перезагружаем Apache: sudo systemctl restart apache2
+Устанавливаем phpmyadmin: sudo apt install phpmyadmin
+
+После скачивания необходимых файлов, появиться окно, где необходимо выбрать apache2, 
+далее нажимаем «Yes» и вводим придуманный вами пароль для дальнейшего входа на phpmyadmin
+
+Последние штрихи: 
+sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf  
+sudo a2enconf phpmyadmin.conf 
+sudo systemctl reload apache2.service
+
+Проверяем! http://YOUR_SERVER_IP/phpmyadmin
+
+Создаем дополнительного пользователя и выдаем ему права.
+
+CREATE USER 'serveradmin'@'%' IDENTIFIED BY 'qazWSX123!';
+GRANT ALL PRIVILEGES ON * . * TO 'serveradmin'@'%';
+
+
+Перезагружаем систему: reboot
+
+
