@@ -5,12 +5,17 @@
 
 Устанавливаем MySQL: sudo apt install mysql-server mysql-client
 
+Установим пароль root: sudo mysqladmin password -u root -p
+
+Команда спросит у вас пароль root от Linux 
+
+Потом нужно будет ввести новый пароль и подтверждение
+Устанавливаем пароль: qazWSX123!
+
+
 Устанавливаем основные параметры MYSQL: sudo mysql_secure_installation
 
-Enter current password for root (enter for none): Enter
-Set a root password? [Y/n] Y
-
-Устанавливаем пароль: qazWSX123!
+плагин валидации паролей MySQL не нужен - n
 
 Remove anonymous users? [Y/n] y
 Disallow root login remotely? [Y/n] y
@@ -32,9 +37,13 @@ sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.co
 sudo a2enconf phpmyadmin.conf 
 sudo systemctl reload apache2.service
 
+Проверяем, что web-браузер работает! http://YOUR_SERVER_IP  
+
 Проверяем! http://YOUR_SERVER_IP/phpmyadmin
 
 Создаем дополнительного пользователя и выдаем ему права.
+
+mysql -u root -p
 
 CREATE USER 'serveradmin'@'%' IDENTIFIED BY 'qazWSX123!';
 GRANT ALL PRIVILEGES ON * . * TO 'serveradmin'@'%';
